@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "firstapp",
+    "secondapp",
+    "django_celery_results"
 ]
 
 MIDDLEWARE = [
@@ -126,8 +128,32 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 
-# CELERY_ACCEPT_CONTENT = ['application/json']
-# CELERY_RESULT_SERIALIZER ='json'
-# CELERY_TASK_SERIALIZER ='json'
-# CELERY_TIMEZONE ='Asia/kolkata'
 
+# EMAIL SETTINGS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jeeva13012002@gmail.com'
+EMAIL_HOST_PASSWORD ='sxydfthsikssznyd'
+DEFAULT_FROM_EMAIL ='jeeva13012002@gmail.com'
+
+
+#FOR USING DJANGO-CELERY-RESULTS
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+# django setting.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+
+CELERY_RESULT_EXTENDED= True
